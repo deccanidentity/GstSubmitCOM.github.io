@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSTSubmit Portal | Managed GST Solutions</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/logo.png">
+</head>
+
+<body style="background: var(--bg-main); color: var(--text-main);">
+
+    <!-- Onboarding Flow Overlay -->
+    <div class="onboarding-overlay">
+        <div class="container" style="display: flex; flex-direction: column; align-items: center;">
+            
+            <!-- Progress Dots -->
+            <div class="onboarding-progress">
+                <div class="progress-dot active"></div>
+                <div class="progress-dot"></div>
+                <div class="progress-dot"></div>
+            </div>
+
+            <!-- Step 1: Login -->
+            <div class="onboarding-card active" id="login-step">
+                <h2>GST Portal Login</h2>
+                <p>Sign in to your secure business vault to manage your GST filings.</p>
+                
+                <button class="btn-google" onclick="simulateGoogleLogin()">
+                    <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" alt="Google">
+                    Continue with Google
+                </button>
+                
+                <div style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted);">
+                    By continuing, you agree to our <a href="terms-of-service.html">Terms</a> & <a href="privacy-policy.html">Privacy Policy</a>
+                </div>
+            </div>
+
+            <!-- Step 2: GSTIN -->
+            <div class="onboarding-card" id="gstin-step">
+                <h2>Business Identity</h2>
+                <p>Enter your GSTIN to fetch your business details automatically.</p>
+                
+                <div class="input-group">
+                    <label for="gstin-number">GSTIN Number</label>
+                    <input type="text" id="gstin-number" placeholder="27AAAAA0000A1Z5" maxlength="15" style="text-transform: uppercase;">
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <button class="btn btn-primary" style="flex: 1;" onclick="validateGSTIN()">Verify & Next <i class="fa-solid fa-arrow-right"></i></button>
+                    <button class="btn btn-outline" style="flex: 1;" onclick="finishOnboarding()">Enter Manually</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Tally/ERP Integration -->
+            <div class="onboarding-card" id="integration-step">
+                <h2>Data Integration</h2>
+                <p>Sync your Tally, Zoho, or Excel data to pre-fill your GSTR-1 instantly.</p>
+                
+                <div class="upload-zone" id="drop-zone" style="margin-bottom: 2rem;">
+                    <input type="file" id="file-input" style="display: none;">
+                    <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                    <h4>Upload Sales Data</h4>
+                    <p>Drag and drop Excel/JSON here</p>
+                </div>
+
+                <div style="display: flex; gap: 1rem;">
+                    <button class="btn btn-accent" style="flex: 1;" onclick="finishOnboarding()">Go to Portal <i class="fa-solid fa-gauge-high"></i></button>
+                    <button class="btn btn-outline" style="flex: 1;" onclick="finishOnboarding()">Continue Setup</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Main Dashboard Container -->
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="dashboard-sidebar">
+            <div class="logo">
+                <img src="img/logo.png" alt="GSTSubmit Logo" class="logo-img">
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-item active" data-section="business-profile">
+                    <i class="fa-solid fa-briefcase"></i> Business Profile
+                </div>
+                <div class="nav-item" data-section="gstr-1">
+                    <i class="fa-solid fa-file-export"></i> GSTR-1 (Sales)
+                </div>
+                <div class="nav-item" data-section="gstr-3b">
+                    <i class="fa-solid fa-file-invoice"></i> GSTR-3B (Summary)
+                </div>
+                <div class="nav-item" data-section="itc-ledger">
+                    <i class="fa-solid fa-coins"></i> ITC Ledger
+                </div>
+                <div class="nav-item" data-section="gst-payments">
+                    <i class="fa-solid fa-credit-card"></i> Payments
+                </div>
+                <div class="nav-item" data-section="file-gst">
+                    <i class="fa-solid fa-paper-plane"></i> File GST
+                </div>
+                <div class="nav-item" data-section="downloads">
+                    <i class="fa-solid fa-cloud-arrow-down"></i> Downloads
+                </div>
+            </nav>
+
+            <div class="sidebar-footer" style="padding-top: 2rem; border-top: 1px solid var(--border-dark);">
+                <div class="nav-item" onclick="location.href='index.html'">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="dashboard-main">
+            
+            <header class="dashboard-header">
+                <div>
+                    <h1 id="section-title">Business Profile</h1>
+                    <p class="text-muted" id="section-description">Manage your GST registration and business entity details.</p>
+                </div>
+                <div class="user-profile" style="display: flex; align-items: center; gap: 1rem; cursor: pointer;" onclick="showDashboardSection('business-profile')">
+                    <div class="avatar" style="width: 48px; height: 48px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-weight: 800;">B</div>
+                    <div style="text-align: right;">
+                        <div style="font-weight: 600;">Business User</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">mahesh.biz@gmail.com</div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Horizontal Progress Nav -->
+            <nav class="dashboard-tabs" style="display: flex; gap: 1rem; margin-bottom: 3rem; border-bottom: 1px solid var(--border-dark); padding-bottom: 1rem;">
+                <div class="tab-item" style="padding: 0.75rem 1.5rem; border-radius: var(--radius-pill); cursor: pointer; font-weight: 600;" onclick="showDashboardSection('business-profile')">Business Profile</div>
+                <div class="tab-item" style="padding: 0.75rem 1.5rem; border-radius: var(--radius-pill); color: var(--text-muted); cursor: pointer; font-weight: 600;" onclick="showDashboardSection('gstr-1')">Sales (GSTR-1)</div>
+                <div class="tab-item" style="padding: 0.75rem 1.5rem; border-radius: var(--radius-pill); color: var(--text-muted); cursor: pointer; font-weight: 600;" onclick="showDashboardSection('gstr-3b')">Summary (GSTR-3B)</div>
+                <div class="tab-item" style="padding: 0.75rem 1.5rem; border-radius: var(--radius-pill); color: var(--text-muted); cursor: pointer; font-weight: 600;" onclick="showDashboardSection('gst-payments')">Payments</div>
+            </nav>
+
+            <!-- Dashboard Sections -->
+            
+            <!-- Section: Business Profile -->
+            <section class="dashboard-section active" id="business-profile">
+                <div class="dashboard-layout-with-sidebar">
+                    <div class="main-column">
+                        
+                        <!-- Entity Details -->
+                        <div class="data-card">
+                            <h3><i class="fa-solid fa-building" style="color: var(--primary);"></i> Entity Details</h3>
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <label>Legal Name of Business *</label>
+                                    <input type="text" placeholder="e.g. Acme Solutions Pvt Ltd">
+                                </div>
+                                <div class="input-group">
+                                    <label>Trade Name</label>
+                                    <input type="text" placeholder="e.g. Acme Solutions">
+                                </div>
+                                <div class="input-group">
+                                    <label>GSTIN *</label>
+                                    <input type="text" value="27AAAAA0000A1Z5" readonly style="opacity: 0.7;">
+                                </div>
+                                <div class="input-group">
+                                    <label>PAN of Business *</label>
+                                    <input type="text" value="AAAAA0000A" readonly style="opacity: 0.7;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Registration Address -->
+                        <div class="data-card">
+                            <h3><i class="fa-solid fa-location-dot" style="color: var(--accent);"></i> Principal Place of Business</h3>
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <label>Building No / Name *</label>
+                                    <input type="text" placeholder="Office No 405">
+                                </div>
+                                <div class="input-group">
+                                    <label>Floor / Premise</label>
+                                    <input type="text" placeholder="Business Park">
+                                </div>
+                                <div class="input-group">
+                                    <label>Area / Locality *</label>
+                                    <input type="text" placeholder="Andheri East">
+                                </div>
+                                <div class="input-group">
+                                    <label>Pincode *</label>
+                                    <input type="text" placeholder="400069">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Authorized Signatory -->
+                        <div class="data-card">
+                            <h3><i class="fa-solid fa-user-tie" style="color: var(--primary);"></i> Authorized Signatory</h3>
+                            <div class="form-grid">
+                                <div class="input-group">
+                                    <label>Full Name *</label>
+                                    <input type="text" placeholder="Mahesh Kumar">
+                                </div>
+                                <div class="input-group">
+                                    <label>Designation</label>
+                                    <input type="text" placeholder="Director">
+                                </div>
+                                <div class="input-group">
+                                    <label>Mobile Number *</label>
+                                    <input type="text" placeholder="9876543210">
+                                </div>
+                                <div class="input-group">
+                                    <label>Email Address *</label>
+                                    <input type="email" placeholder="mahesh@acme.com">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: flex-end; margin-top: 2rem;">
+                            <button class="btn btn-primary" onclick="showDashboardSection('gstr-1')">Save & Continue <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+
+                    </div>
+
+                    <!-- Right Sidebar Widgets -->
+                    <div class="sidebar-column">
+                        <div class="sidebar-widget">
+                            <h4><i class="fa-solid fa-calendar-check" style="color: var(--primary);"></i> Upcoming Deadlines</h4>
+                            <div style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                                    <span>GSTR-1 (April)</span>
+                                    <span style="color: #f43f5e; font-weight: 600;">11 May</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                                    <span>GSTR-3B (April)</span>
+                                    <span style="color: #fbbf24; font-weight: 600;">20 May</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-widget" style="background: linear-gradient(135deg, var(--bg-alt) 0%, rgba(99, 102, 241, 0.1) 100%);">
+                            <h4><i class="fa-solid fa-cloud-arrow-up" style="color: var(--primary);"></i> ERP Sync</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Connect Tally or Zoho to auto-sync invoices daily.</p>
+                            <button class="btn btn-sm btn-primary" style="width: 100%;">Setup Integration</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: GSTR-1 -->
+            <section class="dashboard-section" id="gstr-1">
+                <div class="data-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h3><i class="fa-solid fa-file-export" style="color: var(--primary);"></i> Outward Supplies (GSTR-1)</h3>
+                        <div class="segmented-control">
+                            <button class="seg-btn active">B2B Invoices</button>
+                            <button class="seg-btn">B2C Small</button>
+                            <button class="seg-btn">Export</button>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container" style="overflow-x: auto; margin-bottom: 2rem;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem;">
+                            <thead>
+                                <tr style="text-align: left; border-bottom: 1px solid var(--border-dark);">
+                                    <th style="padding: 1rem;">Invoice No</th>
+                                    <th style="padding: 1rem;">Date</th>
+                                    <th style="padding: 1rem;">GSTIN of Recipient</th>
+                                    <th style="padding: 1rem;">Taxable Value</th>
+                                    <th style="padding: 1rem;">GST Amount</th>
+                                    <th style="padding: 1rem;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="border-bottom: 1px solid var(--border-dark);">
+                                    <td style="padding: 1rem;">INV/24/001</td>
+                                    <td style="padding: 1rem;">02 Apr 2024</td>
+                                    <td style="padding: 1rem;">27BBBBB1111B1Z2</td>
+                                    <td style="padding: 1rem;">₹ 50,000.00</td>
+                                    <td style="padding: 1rem;">₹ 9,000.00</td>
+                                    <td style="padding: 1rem;"><button class="btn btn-sm btn-outline"><i class="fa-solid fa-edit"></i></button></td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid var(--border-dark);">
+                                    <td style="padding: 1rem;">INV/24/002</td>
+                                    <td style="padding: 1rem;">05 Apr 2024</td>
+                                    <td style="padding: 1rem;">27CCCCC2222C1Z3</td>
+                                    <td style="padding: 1rem;">₹ 1,20,000.00</td>
+                                    <td style="padding: 1rem;">₹ 21,600.00</td>
+                                    <td style="padding: 1rem;"><button class="btn btn-sm btn-outline"><i class="fa-solid fa-edit"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-outline" style="width: 100%; border-style: dashed;"><i class="fa-solid fa-plus"></i> Add New Invoice</button>
+                </div>
+            </section>
+
+            <!-- Section: GSTR-3B -->
+            <section class="dashboard-section" id="gstr-3b">
+                <div class="data-card">
+                    <h3><i class="fa-solid fa-file-invoice" style="color: var(--accent);"></i> GSTR-3B Summary</h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem;">
+                        <div style="padding: 1.5rem; background: rgba(99, 102, 241, 0.05); border-radius: var(--radius-md); border-left: 4px solid var(--primary);">
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Outward Tax Liability</div>
+                            <div style="font-size: 1.5rem; font-weight: 800; margin-top: 0.5rem;">₹ 30,600</div>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(34, 197, 94, 0.05); border-radius: var(--radius-md); border-left: 4px solid #22c55e;">
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Eligible ITC</div>
+                            <div style="font-size: 1.5rem; font-weight: 800; margin-top: 0.5rem;">₹ 12,400</div>
+                        </div>
+                        <div style="padding: 1.5rem; background: rgba(244, 63, 94, 0.05); border-radius: var(--radius-md); border-left: 4px solid #f43f5e;">
+                            <div style="font-size: 0.8rem; color: var(--text-muted);">Net Tax to be Paid</div>
+                            <div style="font-size: 1.5rem; font-weight: 800; margin-top: 0.5rem;">₹ 18,200</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: ITC Ledger -->
+            <section class="dashboard-section" id="itc-ledger">
+                <div class="data-card">
+                    <h3><i class="fa-solid fa-coins" style="color: #fbbf24;"></i> Input Tax Credit Ledger</h3>
+                    <div class="itc-summary" style="margin-top: 2rem; display: flex; gap: 2rem;">
+                        <div style="flex: 1; text-align: center; padding: 2rem; background: var(--bg-alt); border-radius: var(--radius-lg);">
+                            <div style="font-size: 0.9rem; color: var(--text-muted);">IGST</div>
+                            <div style="font-size: 2rem; font-weight: 800; color: #8b5cf6;">₹ 5,000</div>
+                        </div>
+                        <div style="flex: 1; text-align: center; padding: 2rem; background: var(--bg-alt); border-radius: var(--radius-lg);">
+                            <div style="font-size: 0.9rem; color: var(--text-muted);">CGST</div>
+                            <div style="font-size: 2rem; font-weight: 800; color: var(--primary);">₹ 3,700</div>
+                        </div>
+                        <div style="flex: 1; text-align: center; padding: 2rem; background: var(--bg-alt); border-radius: var(--radius-lg);">
+                            <div style="font-size: 0.9rem; color: var(--text-muted);">SGST</div>
+                            <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">₹ 3,700</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section: File GST -->
+            <section class="dashboard-section" id="file-gst">
+                <div class="success-container" style="text-align: center; padding: 4rem 2rem;">
+                    <div class="success-icon" style="font-size: 5rem; color: #22c55e; margin-bottom: 2rem;">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <h2>GST Return Filed! 🚀</h2>
+                    <p class="text-muted" style="font-size: 1.2rem; margin-bottom: 3rem;">GSTR-1 and GSTR-3B for April 2024 have been submitted successfully.</p>
+                    
+                    <div style="display: flex; gap: 1.5rem; justify-content: center;">
+                        <button class="btn btn-primary" onclick="showDashboardSection('downloads')"><i class="fa-solid fa-download"></i> Download Acknowledgement</button>
+                        <button class="btn btn-outline">Track ARN Status</button>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/gst-dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Way Dashboard | GSTSubmit Logistics</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/e-invoice-dashboard.css">
+    <link rel="stylesheet" href="css/ai-assistant.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .map-preview {
+            width: 100%;
+            height: 250px;
+            background: #0F172A;
+            border-radius: 12px;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #1E293B;
+        }
+        .map-line {
+            position: absolute;
+            width: 70%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #3B82F6, transparent);
+            top: 50%;
+            left: 15%;
+            opacity: 0.5;
+        }
+        .vehicle-dot {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background: #3B82F6;
+            border-radius: 50%;
+            top: calc(50% - 6px);
+            box-shadow: 0 0 15px #3B82F6;
+            animation: moveAlong 6s linear infinite;
+        }
+        @keyframes moveAlong {
+            0% { left: 15%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 85%; opacity: 0; }
+        }
+        .status-pill {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .status-transit { background: #DBEAFE; color: #1E40AF; }
+        .status-expired { background: #FEE2E2; color: #991B1B; }
+        .status-delivered { background: #D1FAE5; color: #065F46; }
+    </style>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/logo.png">
+</head>
+
+<body>
+    <div class="e-invoice-dashboard">
+        <!-- Sidebar -->
+        <aside class="sidebar-light">
+            <div class="logo-container" style="padding: 1rem;">
+                <img src="img/logo.png" alt="GSTSubmit Logo" style="height: 100px; width: auto;">
+            </div>
+
+            <nav>
+                <a href="#" class="nav-link-item active" data-section="overview">
+                    <i class="fa-solid fa-gauge-high"></i>
+                    Command Center
+                </a>
+                <a href="#" class="nav-link-item" data-section="shipments">
+                    <i class="fa-solid fa-truck-fast"></i>
+                    All Shipments
+                </a>
+                <a href="#" class="nav-link-item" data-section="bulk">
+                    <i class="fa-solid fa-layer-group"></i>
+                    Bulk Generation
+                </a>
+                <a href="#" class="nav-link-item" data-section="consolidated">
+                    <i class="fa-solid fa-box-archive"></i>
+                    Consolidated EWB
+                </a>
+                <a href="#" class="nav-link-item" data-section="tracking">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    Live Tracking
+                </a>
+                <a href="#" class="nav-link-item" data-section="reports">
+                    <i class="fa-solid fa-chart-line"></i>
+                    MIS Reports
+                </a>
+                <a href="#" class="nav-link-item" data-section="settings">
+                    <i class="fa-solid fa-gears"></i>
+                    Logistics Config
+                </a>
+                <div style="margin: 2rem 0 1rem; font-size: 0.75rem; color: #94A3B8; text-transform: uppercase; font-weight: 700; padding: 0 1rem;">Logistics AI</div>
+                <a href="#" class="nav-link-item" data-section="ai-logistics" style="color: #3B82F6; font-weight: 600;">
+                    <i class="fa-solid fa-microchip"></i>
+                    AI Logistics Lab
+                </a>
+            </nav>
+
+            <div class="sidebar-footer" style="margin-top: auto; padding: 1.5rem; border-top: 1px solid #F1F5F9;">
+                <a href="index.html" class="nav-link-item" style="color: #64748B;">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Back to Portal
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-area">
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="search-input-group">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search Vehicle, EWB, Transporter...">
+                </div>
+                <div class="top-icons">
+                    <i class="fa-solid fa-headset" onclick="showToast('Connecting to Logistics Support...')"></i>
+                    <i class="fa-solid fa-bell" onclick="showToast('3 EWBs expiring in 2 hours!')"></i>
+                    <div class="user-profile-btn" onclick="showToast('Logistics Manager: Mahesh')">M</div>
+                </div>
+            </div>
+
+            <!-- Sections Container -->
+            <div id="dashboard-sections">
+                
+                <!-- Overview Section -->
+                <div class="dashboard-section active" id="section-overview">
+                    <div class="widgets-row">
+                        <div class="widget-card">
+                            <div class="widget-content">
+                                <h4>Active EWBs</h4>
+                                <p class="widget-subtext">Currently in transit</p>
+                                <div class="widget-value">42</div>
+                                <p class="widget-subtext" style="color: #10B981; font-weight: 600;">+5 since morning</p>
+                            </div>
+                            <div class="circular-progress" style="--percentage: 65%; --progress-color: #3B82F6;">
+                                <span class="percentage-label">65%</span>
+                            </div>
+                        </div>
+
+                        <div class="widget-card">
+                            <div class="widget-content">
+                                <h4>Expiring Soon</h4>
+                                <p class="widget-subtext">Requires immediate action</p>
+                                <div class="widget-value" style="color: #EF4444;">8</div>
+                                <p class="widget-subtext" style="font-weight: 600;">Worth ₹1.2 Cr</p>
+                            </div>
+                            <div class="circular-progress" style="--percentage: 15%; --progress-color: #EF4444;">
+                                <span class="percentage-label">15%</span>
+                            </div>
+                        </div>
+
+                        <div class="uploads-card">
+                            <div class="uploads-header">
+                                <h4 style="margin: 0;">Vehicle Health</h4>
+                            </div>
+                            <div style="margin-top: 1rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 0.8rem;">
+                                    <span>TS 09 EA 1234 (Mumbai)</span>
+                                    <span style="color: #10B981;">On Time</span>
+                                </div>
+                                <div class="progress-container"><div class="progress-fill" style="width: 85%;"></div></div>
+                                
+                                <div style="display: flex; justify-content: space-between; margin: 1rem 0 0.5rem; font-size: 0.8rem;">
+                                    <span>KA 01 BK 9988 (Chennai)</span>
+                                    <span style="color: #F59E0B;">Delayed</span>
+                                </div>
+                                <div class="progress-container"><div class="progress-fill" style="width: 40%; background: #F59E0B;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem;">
+                        <div class="uploads-card">
+                            <div class="uploads-header">
+                                <h3><i class="fa-solid fa-truck-moving" style="color: #3B82F6;"></i> Critical Shipments</h3>
+                                <button class="btn btn-sm btn-primary" onclick="showSection('tracking')">View Live Map</button>
+                            </div>
+                            <div class="table-container" style="margin-top: 1.5rem;">
+                                <table style="width: 100%; border-collapse: collapse;">
+                                    <thead>
+                                        <tr style="text-align: left; border-bottom: 1px solid #E2E8F0; color: #64748B;">
+                                            <th style="padding: 1rem;">EWB No</th>
+                                            <th style="padding: 1rem;">Vehicle</th>
+                                            <th style="padding: 1rem;">Route</th>
+                                            <th style="padding: 1rem;">ETA</th>
+                                            <th style="padding: 1rem;">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding: 1rem; font-weight: 600;">1214 5562 8891</td>
+                                            <td style="padding: 1rem;">TS 09 EA 1234</td>
+                                            <td style="padding: 1rem;">HYD → BOM</td>
+                                            <td style="padding: 1rem;">6h 20m</td>
+                                            <td style="padding: 1rem;"><span class="status-pill status-transit">In Transit</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shipments Section -->
+                <div class="dashboard-section" id="section-shipments" style="display: none;">
+                    <div class="uploads-card">
+                        <div class="uploads-header">
+                            <h3><i class="fa-solid fa-list-check"></i> E-Way Bill Ledger</h3>
+                            <button class="btn btn-sm btn-accent" onclick="openModal('ewbModal')">New E-Way Bill</button>
+                        </div>
+                        <div class="table-container" style="margin-top: 2rem;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="text-align: left; border-bottom: 1px solid #E2E8F0;">
+                                        <th style="padding: 1rem;">Date</th>
+                                        <th style="padding: 1rem;">EWB No</th>
+                                        <th style="padding: 1rem;">Consignee</th>
+                                        <th style="padding: 1rem;">Value</th>
+                                        <th style="padding: 1rem;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 1rem;">15 May 24</td>
+                                        <td style="padding: 1rem;">5512 8893 1120</td>
+                                        <td style="padding: 1rem;">Reliance Retail</td>
+                                        <td style="padding: 1rem;">₹ 4.52 L</td>
+                                        <td style="padding: 1rem;"><span class="status-pill status-delivered">Delivered</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bulk Section -->
+                <div class="dashboard-section" id="section-bulk" style="display: none;">
+                    <div class="uploads-card" style="text-align: center; padding: 4rem;">
+                        <i class="fa-solid fa-file-import" style="font-size: 3rem; color: #3B82F6; margin-bottom: 1rem;"></i>
+                        <h3>Bulk EWB Generation</h3>
+                        <p style="color: #64748B; margin-bottom: 2rem;">Upload your ERP manifest or Excel file to generate bills in bulk.</p>
+                        <button class="btn btn-primary" onclick="simulateBulkGen()">Select Manifest File</button>
+                        <div id="bulk-status" style="margin-top: 2rem; display: none;">
+                            <div class="progress-container" style="max-width: 400px; margin: 0 auto;">
+                                <div id="bulk-progress-bar" class="progress-fill" style="width: 0%;"></div>
+                            </div>
+                            <p id="bulk-text" style="margin-top: 1rem;">Analyzing rows...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tracking Section -->
+                <div class="dashboard-section" id="section-tracking" style="display: none;">
+                    <div class="widgets-row">
+                        <div class="widget-card" style="grid-column: span 2;">
+                            <h3>Live Logistics Map</h3>
+                            <div class="map-preview">
+                                <div class="map-line"></div>
+                                <div class="vehicle-dot"></div>
+                                <div class="vehicle-dot" style="animation-delay: 2s; background: #10B981; box-shadow: 0 0 15px #10B981;"></div>
+                                <i class="fa-solid fa-warehouse" style="position: absolute; left: 10%; top: 45%; color: #64748B;"></i>
+                                <i class="fa-solid fa-city" style="position: absolute; right: 10%; top: 45%; color: #64748B;"></i>
+                            </div>
+                            <div style="display: flex; gap: 2rem; margin-top: 1rem;">
+                                <div><i class="fa-solid fa-circle" style="color: #3B82F6; font-size: 0.6rem;"></i> Truck A-12</div>
+                                <div><i class="fa-solid fa-circle" style="color: #10B981; font-size: 0.6rem;"></i> Truck B-45</div>
+                            </div>
+                        </div>
+                        <div class="uploads-card">
+                            <h4>Recent Alerts</h4>
+                            <div style="margin-top: 1rem;">
+                                <div style="padding: 0.8rem; border-left: 3px solid #EF4444; background: #FFF1F2; margin-bottom: 0.5rem; font-size: 0.8rem;">
+                                    <strong>Delayed:</strong> MH 12 AB 4567 stuck at Toll Plaza 4.
+                                </div>
+                                <div style="padding: 0.8rem; border-left: 3px solid #F59E0B; background: #FFFBEB; font-size: 0.8rem;">
+                                    <strong>Warning:</strong> KA 05 MN 1122 expiring in 15km.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- AI Logistics Section -->
+                <div class="dashboard-section" id="section-ai-logistics" style="display: none;">
+                    <div class="widgets-row">
+                        <div class="widget-card" style="grid-column: span 2; background: linear-gradient(135deg, #EFF6FF, #DBEAFE); border: 1px solid #BFDBFE;">
+                            <div class="widget-content">
+                                <h4 style="color: #1E40AF;"><i class="fa-solid fa-route"></i> AI Route Optimizer</h4>
+                                <p class="widget-subtext">Optimizing transit time using historical toll and traffic data</p>
+                                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                                    <input type="text" id="ai-origin" placeholder="Origin (e.g. Hyderabad)" style="flex: 1; padding: 0.85rem; border: 1px solid #BFDBFE; border-radius: 8px;">
+                                    <input type="text" id="ai-dest" placeholder="Destination (e.g. Mumbai)" style="flex: 1; padding: 0.85rem; border: 1px solid #BFDBFE; border-radius: 8px;">
+                                    <button class="btn btn-primary" onclick="optimizeRoute()">Optimize</button>
+                                </div>
+                                <div id="route-result" style="margin-top: 1rem; font-weight: 600; color: #1E40AF; display: none;">
+                                    <i class="fa-solid fa-check-circle"></i> Fastest Route Found via NH-65. ETA reduced by 2.5 hours.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-card" style="background: #111827; color: white;">
+                            <div class="widget-content">
+                                <h4 style="color: #94A3B8;">Logistics Risk AI</h4>
+                                <div style="margin-top: 1rem;">
+                                    <div style="font-size: 0.8rem; margin-bottom: 0.5rem; display: flex; justify-content: space-between;">
+                                        <span>Expiry Probability</span>
+                                        <span style="color: #F59E0B;">Medium</span>
+                                    </div>
+                                    <div class="progress-container" style="background: #374151;"><div class="progress-fill" style="width: 45%; background: #F59E0B;"></div></div>
+                                    
+                                    <div style="font-size: 0.8rem; margin: 1rem 0 0.5rem; display: flex; justify-content: space-between;">
+                                        <span>Vehicle Reliability</span>
+                                        <span style="color: #10B981;">94%</span>
+                                    </div>
+                                    <div class="progress-container" style="background: #374151;"><div class="progress-fill" style="width: 94%; background: #10B981;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uploads-card" style="margin-top: 2rem;">
+                        <h3><i class="fa-solid fa-radar" style="color: #3B82F6;"></i> Transit Sentinel Scan</h3>
+                        <p style="color: #64748B;">AI-powered real-time tracking of all active vehicles to predict delays and reroute automatically.</p>
+                        <button class="btn btn-primary" style="margin-top: 1rem;" onclick="runTransitScan()">Run Sentinel Scan</button>
+                        <div id="sentinel-logs" style="margin-top: 1.5rem; max-height: 200px; overflow-y: auto; background: #F1F5F9; padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.85rem; display: none; color: #1E293B;"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="ewbModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); display: none; z-index: 5000; align-items: center; justify-content: center;">
+        <div class="modal-content" style="background: white; padding: 2rem; border-radius: 12px; width: 500px;">
+            <h3>Generate Single E-Way Bill</h3>
+            <div class="form-grid" style="grid-template-columns: 1fr; margin-top: 1.5rem; gap: 1rem;">
+                <div class="input-group">
+                    <label>Invoice Number</label>
+                    <input type="text" placeholder="INV/24/...">
+                </div>
+                <div class="input-group">
+                    <label>Vehicle Number</label>
+                    <input type="text" placeholder="TS 09 ...">
+                </div>
+            </div>
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button class="btn btn-primary" onclick="createShipment()">Generate</button>
+                <button class="btn btn-outline" onclick="closeModal('ewbModal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" style="position: fixed; bottom: 2rem; right: 2rem; z-index: 6000;"></div>
+
+    <!-- Scripts -->
+    <script src="js/e-way-dashboard.js"></script>
+    <script src="js/ai-assistant.js"></script>
+</body>
+
+</html>

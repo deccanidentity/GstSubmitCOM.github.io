@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Invoicing & EWB Dashboard | GSTSubmit</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/e-invoice-dashboard.css">
+    <link rel="stylesheet" href="css/ai-assistant.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/logo.png">
+</head>
+
+<body>
+
+    <div class="e-invoice-dashboard">
+        
+        <!-- Sidebar -->
+        <aside class="sidebar-light">
+            <div class="logo-container" style="padding: 1rem;">
+                <img src="img/logo.png" alt="GSTSubmit Logo" style="height: 100px; width: auto;">
+            </div>
+
+            <nav>
+                <a href="#" class="nav-link-item active" data-section="overview">
+                    <i class="fa-solid fa-house"></i>
+                    Dashboard
+                </a>
+                <a href="#" class="nav-link-item" data-section="invoices">
+                    <i class="fa-solid fa-file-invoice"></i>
+                    Invoices
+                </a>
+                <a href="#" class="nav-link-item" data-section="import">
+                    <i class="fa-solid fa-upload"></i>
+                    Import invoices
+                </a>
+                <a href="#" class="nav-link-item" data-section="eway">
+                    <i class="fa-solid fa-truck"></i>
+                    E-way Bills
+                </a>
+                <a href="#" class="nav-link-item" data-section="history">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    Import History
+                </a>
+                <a href="#" class="nav-link-item" data-section="reports">
+                    <i class="fa-solid fa-chart-simple"></i>
+                    Reports
+                </a>
+                <a href="#" class="nav-link-item" data-section="reconciliation">
+                    <i class="fa-solid fa-code-branch"></i>
+                    Reconciliation
+                </a>
+                <a href="#" class="nav-link-item" data-section="settings">
+                    <i class="fa-solid fa-gear"></i>
+                    Setting
+                </a>
+                <div style="margin: 2rem 0 1rem; font-size: 0.75rem; color: #94A3B8; text-transform: uppercase; font-weight: 700; padding: 0 1rem;">AI Intelligence</div>
+                <a href="#" class="nav-link-item" data-section="ai-lab" style="color: #8B5CF6; font-weight: 600;">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    AI Compliance Lab
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-area">
+            
+            <!-- Top Bar -->
+            <div class="top-bar">
+                <div class="search-input-group">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search Invoices, IRN, EWB...">
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; background: rgba(139, 92, 246, 0.1); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(139, 92, 246, 0.2); margin-left: 1rem;">
+                    <div style="width: 8px; height: 8px; background: #8B5CF6; border-radius: 50%; box-shadow: 0 0 8px #8B5CF6;"></div>
+                    <span style="font-size: 0.75rem; font-weight: 700; color: #8B5CF6; letter-spacing: 0.05em;">AI SYSTEM ACTIVE</span>
+                </div>
+                <div class="top-icons">
+                    <i class="fa-solid fa-comment-dots" title="Live Chat" onclick="showToast('Connecting to support agent...')"></i>
+                    <i class="fa-solid fa-bell" title="Notifications" onclick="showToast('No new notifications')"></i>
+                    <i class="fa-solid fa-circle-question" title="Help Center" onclick="showToast('Opening help documentation...')"></i>
+                    <div class="user-profile-btn" onclick="showToast('Profile: Mahesh (mahesh.biz@gmail.com)')" style="width: 32px; height: 32px; border-radius: 50%; background: #E2E8F0; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #64748B; cursor: pointer;">M</div>
+                </div>
+            </div>
+
+            <!-- Sections Container -->
+            <div id="dashboard-sections">
+                
+                <!-- Overview Section -->
+                <div class="dashboard-section active" id="section-overview">
+                    <!-- Widgets Row -->
+                    <div class="widgets-row">
+                        <!-- IRN Failed Widget -->
+                        <div class="widget-card">
+                            <div class="widget-content">
+                                <h4>IRN Failed</h4>
+                                <p class="widget-subtext">View the error summary</p>
+                                <div class="widget-value">1,123</div>
+                                <p class="widget-subtext" style="font-weight: 600; color: #64748B;">worth ₹72,31,762</p>
+                            </div>
+                            <div class="circular-progress" style="--percentage: 43%; --progress-color: #EF4444; cursor: pointer;" onclick="showSection('reports')">
+                        <span class="percentage-label">12%</span>
+                        <div class="trend-indicator trend-down">
+                            <i class="fa-solid fa-caret-down"></i> -2% this week
+                        </div>
+                    </div>
+        </div>
+                        </div>
+
+                        <!-- Pending Invoices Widget -->
+                        <div class="widget-card">
+                            <div class="widget-content">
+                                <h4>Pending Invoices</h4>
+                                <p class="widget-subtext">Get started and generate e-invoices</p>
+                                <div class="widget-value">1,123</div>
+                                <p class="widget-subtext" style="font-weight: 600; color: #64748B;">worth ₹72,31,762</p>
+                            </div>
+                            <div class="circular-progress" style="--percentage: 122deg; --progress-color: #F59E0B;">
+                                <span class="percentage-label">34%</span>
+                                <div class="trend-indicator trend-up">
+                                    <i class="fa-solid fa-caret-up"></i> +12% this week
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Latest Uploads Widget -->
+                        <div class="uploads-card">
+                            <div class="uploads-header">
+                                <h4 style="margin: 0; color: #64748B;">Latest Uploads</h4>
+                                <a href="#" onclick="showSection('history')" style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700;">Import History</a>
+                            </div>
+                            
+                            <div class="upload-item-row" style="margin-bottom: 0.5rem; border: none; padding: 0;">
+                                <div class="upload-icon-box">
+                                    <i class="fa-solid fa-file-excel"></i>
+                                </div>
+                                <div class="upload-details">
+                                    <div class="upload-name">NewAlsna.xlsx</div>
+                                    <div class="upload-meta">
+                                        <i class="fa-solid fa-file-lines"></i> 12292 &nbsp; <i class="fa-solid fa-clock"></i> 11:10pm, 21 Jan
+                                    </div>
+                                    <div class="progress-container">
+                                        <div class="progress-fill" style="width: 85%;"></div>
+                                    </div>
+                                </div>
+                                <i class="fa-solid fa-chevron-right" style="color: #4F46E5;"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div style="margin-top: 3rem;">
+                        <h4 style="color: #64748B; margin-bottom: 1.5rem;">Quick Actions</h4>
+                        <div class="quick-actions-grid">
+                            <div class="action-card" onclick="showSection('reconciliation')">
+                                <div class="action-icon bg-blue-soft">
+                                    <i class="fa-solid fa-user-check"></i>
+                                </div>
+                                <h5>GSTN Verification</h5>
+                                <p>Purchase Invoicing & GSTR 2 Documents like Advanc..</p>
+                            </div>
+                            <div class="action-card" onclick="showSection('reports')">
+                                <div class="action-icon bg-green-soft">
+                                    <i class="fa-solid fa-chart-pie"></i>
+                                </div>
+                                <h5>MIS Dashboard</h5>
+                                <p>Purchase Invoicing & GSTR 2 Documents like Advanc..</p>
+                            </div>
+                            <div class="action-card" onclick="showSection('invoices')">
+                                <div class="action-icon bg-orange-soft">
+                                    <i class="fa-solid fa-file-arrow-down"></i>
+                                </div>
+                                <h5>Purchase E-Invoices</h5>
+                                <p>Purchase Invoicing & GSTR 2 Documents like Advanc..</p>
+                            </div>
+                            <div class="action-card" onclick="showSection('ai-lab')">
+                                <div class="action-icon bg-purple-soft">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                </div>
+                                <h5>HSN Code Search</h5>
+                                <p>Search and validate HSN codes with AI Predictor...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Invoices Section -->
+                <div class="dashboard-section" id="section-invoices" style="display: none;">
+                    <div class="uploads-card">
+                        <div class="uploads-header">
+                            <h3><i class="fa-solid fa-file-invoice" style="color: var(--primary);"></i> Invoices List</h3>
+                            <button class="btn btn-sm btn-accent" onclick="openModal('invoiceModal')"><i class="fa-solid fa-plus"></i> Create New</button>
+                        </div>
+                        <div class="table-container" style="overflow-x: auto; margin-top: 2rem;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="text-align: left; border-bottom: 1px solid #E2E8F0; color: #64748B; font-size: 0.85rem;">
+                                        <th style="padding: 1rem;">Invoice No</th>
+                                        <th style="padding: 1rem;">Date</th>
+                                        <th style="padding: 1rem;">Customer</th>
+                                        <th style="padding: 1rem;">Value</th>
+                                        <th style="padding: 1rem;">IRN Status</th>
+                                        <th style="padding: 1rem;">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr style="border-bottom: 1px solid #F1F5F9;">
+                                        <td style="padding: 1rem; font-weight: 600;">INV/24/001</td>
+                                        <td style="padding: 1rem;">15 May 2024</td>
+                                        <td style="padding: 1rem;">Global Industries</td>
+                                        <td style="padding: 1rem;">₹ 45,670.00</td>
+                                        <td style="padding: 1rem;"><span class="status-badge success">Generated</span></td>
+                                        <td style="padding: 1rem;"><i class="fa-solid fa-ellipsis-vertical"></i></td>
+                                    </tr>
+                                    <tr style="border-bottom: 1px solid #F1F5F9;">
+                                        <td style="padding: 1rem; font-weight: 600;">INV/24/002</td>
+                                        <td style="padding: 1rem;">14 May 2024</td>
+                                        <td style="padding: 1rem;">Alpha Tech Ltd</td>
+                                        <td style="padding: 1rem;">₹ 12,300.00</td>
+                                        <td style="padding: 1rem;"><span class="status-badge warning">Pending</span></td>
+                                        <td style="padding: 1rem;"><i class="fa-solid fa-ellipsis-vertical"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Import Section -->
+                <div class="dashboard-section" id="section-import" style="display: none;">
+                    <div class="uploads-card" style="text-align: center; padding: 5rem;">
+                        <div style="font-size: 4rem; color: #4F46E5; margin-bottom: 2rem;">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                        </div>
+                        <h3>Upload Your Invoices</h3>
+                        <p style="color: #64748B; margin-bottom: 2rem;">Drag and drop your Excel or JSON files here to generate bulk e-invoices.</p>
+                        <button class="btn btn-primary" onclick="simulateUpload()">Select Files to Upload</button>
+                        <div id="upload-status" style="margin-top: 2rem; display: none;">
+                            <div class="progress-container" style="width: 300px; margin: 0 auto;">
+                                <div id="upload-progress-bar" class="progress-fill" style="width: 0%;"></div>
+                            </div>
+                            <p id="upload-text" style="margin-top: 1rem; font-size: 0.9rem;">Processing...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports Section -->
+                <div class="dashboard-section" id="section-reports" style="display: none;">
+                    <!-- Date Range Filter -->
+                    <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center;">
+                        <h2 style="margin: 0; font-size: 1.5rem;">Analytics & Reports</h2>
+                        <div style="display: flex; gap: 1rem; align-items: center; background: white; padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid #E2E8F0;">
+                            <i class="fa-solid fa-calendar" style="color: #64748B;"></i>
+                            <span style="font-size: 0.85rem; font-weight: 600;">May 01, 2024 - May 31, 2024</span>
+                            <i class="fa-solid fa-chevron-down" style="font-size: 0.75rem; color: #64748B;"></i>
+                        </div>
+                    </div>
+
+                    <div class="widgets-row">
+                        <div class="widget-card" style="background: linear-gradient(135deg, #4F46E5, #3730A3); color: white;">
+                            <div class="widget-content">
+                                <h4 style="color: rgba(255,255,255,0.7);">Total Tax Collected</h4>
+                                <div style="font-size: 1.75rem; font-weight: 800; margin: 0.5rem 0;">₹ 12,45,670.00</div>
+                                <div style="font-size: 0.75rem; color: #10B981; font-weight: 700;"><i class="fa-solid fa-arrow-up"></i> +14.2% vs last month</div>
+                            </div>
+                        </div>
+                        <div class="widget-card">
+                            <div class="widget-content">
+                                <h4 style="color: #64748B;">Total Exempt Sales</h4>
+                                <div style="font-size: 1.75rem; font-weight: 800; margin: 0.5rem 0;">₹ 2,12,300.00</div>
+                                <div style="font-size: 0.75rem; color: #64748B;">52 Transactions</div>
+                            </div>
+                        </div>
+                        <div class="widget-card">
+                            <div class="widget-content">
+                                <h4 style="color: #64748B;">Pending Liability</h4>
+                                <div style="font-size: 1.75rem; font-weight: 800; margin: 0.5rem 0; color: #EF4444;">₹ 45,900.00</div>
+                                <div style="font-size: 0.75rem; color: #EF4444; font-weight: 700;">Due in 4 days</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widgets-row" style="margin-top: 1.5rem;">
+                        <div class="widget-card" style="grid-column: span 2;">
+                            <div class="widget-content">
+                                <h4>Tax Category Distribution</h4>
+                                <div style="margin-top: 1.5rem;">
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.4rem;">
+                                            <span>GST 18%</span>
+                                            <span style="font-weight: 700;">₹ 8,40,000 (68%)</span>
+                                        </div>
+                                        <div class="progress-container"><div class="progress-fill" style="width: 68%; background: #4F46E5;"></div></div>
+                                    </div>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.4rem;">
+                                            <span>GST 12%</span>
+                                            <span style="font-weight: 700;">₹ 3,10,000 (25%)</span>
+                                        </div>
+                                        <div class="progress-container"><div class="progress-fill" style="width: 25%; background: #8B5CF6;"></div></div>
+                                    </div>
+                                    <div style="margin-bottom: 1rem;">
+                                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.4rem;">
+                                            <span>GST 5%</span>
+                                            <span style="font-weight: 700;">₹ 95,670 (7%)</span>
+                                        </div>
+                                        <div class="progress-container"><div class="progress-fill" style="width: 7%; background: #A78BFA;"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-card">
+                            <div class="widget-content" style="text-align: center;">
+                                <h4>Compliance Health</h4>
+                                <div class="circular-progress" style="width: 130px; height: 130px; margin: 1.5rem auto; --percentage: 338deg; --progress-color: #10B981;">
+                                    <span class="percentage-label" style="font-size: 1.5rem; color: #1E293B;">94%</span>
+                                </div>
+                                <div style="background: #ECFDF5; color: #059669; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; display: inline-block;">ELITE STATUS</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                        <button class="btn btn-outline" style="flex: 1;" onclick="showToast('Downloading GSTR-1 Summary PDF...')"><i class="fa-solid fa-file-pdf"></i> Download PDF Report</button>
+                        <button class="btn btn-outline" style="flex: 1;" onclick="showToast('Exporting data to Excel...')"><i class="fa-solid fa-file-excel"></i> Export to Excel</button>
+                    </div>
+                </div>
+
+                <!-- E-way Bills Section -->
+                <div class="dashboard-section" id="section-eway" style="display: none;">
+                    <div class="uploads-card">
+                        <h3><i class="fa-solid fa-truck" style="color: var(--primary);"></i> E-way Bill Management</h3>
+                        <div class="widgets-row" style="margin-top: 2rem;">
+                            <div class="widget-card" style="padding: 1rem;">
+                                <h5>Active EWBs</h5>
+                                <div style="font-size: 1.5rem; font-weight: 700;">14</div>
+                            </div>
+                            <div class="widget-card" style="padding: 1rem;">
+                                <h5>Expiring Soon</h5>
+                                <div style="font-size: 1.5rem; font-weight: 700; color: var(--danger);">3</div>
+                            </div>
+                        </div>
+                        <div class="table-container" style="margin-top: 2rem;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="text-align: left; border-bottom: 1px solid #E2E8F0; color: #64748B;">
+                                        <th style="padding: 1rem;">EWB No</th>
+                                        <th style="padding: 1rem;">Vehicle</th>
+                                        <th style="padding: 1rem;">Validity</th>
+                                        <th style="padding: 1rem;">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 1rem;">1214 5562 8891</td>
+                                        <td style="padding: 1rem;">TS 09 EA 1234</td>
+                                        <td style="padding: 1rem;">18 May 2024</td>
+                                        <td style="padding: 1rem;"><span class="status-badge primary">In Transit</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Section -->
+                <div class="dashboard-section" id="section-history" style="display: none;">
+                    <div class="uploads-card">
+                        <h3><i class="fa-solid fa-clock-rotate-left" style="color: var(--primary);"></i> Import History</h3>
+                        <div style="margin-top: 2rem;">
+                            <div class="upload-item-row" style="padding: 1rem; border: 1px solid #F1F5F9; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
+                                <div class="upload-icon-box"><i class="fa-solid fa-file-excel"></i></div>
+                                <div class="upload-details" style="flex: 1;">
+                                    <div class="upload-name">Batch_May_15.xlsx</div>
+                                    <div class="upload-meta">145 Invoices • Success</div>
+                                </div>
+                                <span style="color: #10B981;">Completed</span>
+                            </div>
+                            <div class="upload-item-row" style="padding: 1rem; border: 1px solid #F1F5F9; border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;">
+                                <div class="upload-icon-box"><i class="fa-solid fa-file-excel"></i></div>
+                                <div class="upload-details" style="flex: 1;">
+                                    <div class="upload-name">Batch_May_12.xlsx</div>
+                                    <div class="upload-meta">89 Invoices • Success</div>
+                                </div>
+                                <span style="color: #10B981;">Completed</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reconciliation Section -->
+                <div class="dashboard-section" id="section-reconciliation" style="display: none;">
+                    <div class="uploads-card">
+                        <h3><i class="fa-solid fa-code-branch" style="color: var(--primary);"></i> GSTR-2A vs Purchase Register</h3>
+                        <div class="info-banner" style="margin-top: 1.5rem; background: #DBEAFE; border-left: 4px solid #3B82F6; padding: 1rem; border-radius: 4px;">
+                            Last synced with GST Portal: Today, 10:30 AM
+                        </div>
+                        <div class="table-container" style="margin-top: 2rem;">
+                            <table style="width: 100%; border-collapse: collapse;">
+                                <thead>
+                                    <tr style="text-align: left; border-bottom: 1px solid #E2E8F0;">
+                                        <th style="padding: 1rem;">GSTIN</th>
+                                        <th style="padding: 1rem;">Portal Value</th>
+                                        <th style="padding: 1rem;">Book Value</th>
+                                        <th style="padding: 1rem;">Difference</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 1rem;">36AAAAA0000A1Z5</td>
+                                        <td style="padding: 1rem;">₹ 50,000</td>
+                                        <td style="padding: 1rem;">₹ 50,000</td>
+                                        <td style="padding: 1rem; color: #10B981;">₹ 0</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 1rem;">36BBBBB1111B2Z6</td>
+                                        <td style="padding: 1rem;">₹ 25,000</td>
+                                        <td style="padding: 1rem;">₹ 24,000</td>
+                                        <td style="padding: 1rem; color: #EF4444;">₹ 1,000</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div class="dashboard-section" id="section-settings" style="display: none;">
+                    <div class="uploads-card">
+                        <h3><i class="fa-solid fa-gear" style="color: var(--primary);"></i> Configuration</h3>
+                        <div class="form-grid" style="margin-top: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                            <div class="input-group" style="margin: 0;">
+                                <label style="display: block; font-weight: 700; margin-bottom: 0.5rem;">GSP UserID</label>
+                                <input type="text" value="GSTSUBMIT_GSP_01" readonly style="width: 100%; padding: 1rem; border-radius: 8px; border: 1px solid #E2E8F0; background: #F8FAFC;">
+                            </div>
+                            <div class="input-group" style="margin: 0;">
+                                <label style="display: block; font-weight: 700; margin-bottom: 0.5rem;">API Access Token</label>
+                                <input type="password" value="••••••••••••" readonly style="width: 100%; padding: 1rem; border-radius: 8px; border: 1px solid #E2E8F0; background: #F8FAFC;">
+                            </div>
+                            <div class="input-group" style="margin: 0;">
+                                <label style="display: block; font-weight: 700; margin-bottom: 0.5rem;">Auto-Generate IRN</label>
+                                <select style="width: 100%; padding: 1rem; border-radius: 8px; border: 1px solid #E2E8F0;">
+                                    <option>Enabled</option>
+                                    <option>Disabled</option>
+                                </select>
+                            </div>
+                            <div class="input-group" style="margin: 0;">
+                                <label style="display: block; font-weight: 700; margin-bottom: 0.5rem;">E-Way Bill Integration</label>
+                                <select style="width: 100%; padding: 1rem; border-radius: 8px; border: 1px solid #E2E8F0;">
+                                    <option>Automatic</option>
+                                    <option>Manual</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" style="margin-top: 2rem;" onclick="showToast('Configuration Saved Successfully!')">Save Configuration</button>
+                    </div>
+                </div>
+
+                <!-- AI Lab Section -->
+                <div class="dashboard-section" id="section-ai-lab" style="display: none;">
+                    <div class="widgets-row">
+                        <div class="widget-card" style="grid-column: span 2; background: linear-gradient(135deg, #F5F3FF, #EDE9FE); border: 1px solid #C4B5FD;">
+                            <div class="widget-content">
+                                <h4 style="color: #6D28D9;"><i class="fa-solid fa-brain"></i> Smart HSN Predictor</h4>
+                                <p class="widget-subtext">Enter item description to predict HSN code using AI</p>
+                                <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+                                    <input type="text" id="ai-item-desc" placeholder="e.g. Cotton Blue Shirt" style="flex: 1; padding: 0.85rem; border: 1px solid #C4B5FD; border-radius: 8px;">
+                                    <button class="btn btn-primary" style="background: #8B5CF6;" onclick="predictHSN()">Predict</button>
+                                </div>
+                                <div id="hsn-result" style="margin-top: 1rem; font-weight: 600; color: #6D28D9; display: none;">
+                                    AI Suggestion: <span style="background: white; padding: 4px 10px; border-radius: 4px; border: 1px solid #C4B5FD;">61051020</span> (Confidence: 98%)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="widget-card" style="background: #1E293B; color: white;">
+                            <div class="widget-content">
+                                <h4 style="color: #94A3B8;">Compliance Health Scan</h4>
+                                <div style="margin-top: 1rem;">
+                                    <div style="font-size: 0.8rem; margin-bottom: 0.5rem; display: flex; justify-content: space-between;">
+                                        <span>Data Consistency</span>
+                                        <span style="color: #10B981;">99%</span>
+                                    </div>
+                                    <div class="progress-container" style="background: #334155;"><div class="progress-fill" style="width: 99%; background: #10B981;"></div></div>
+                                    
+                                    <div style="font-size: 0.8rem; margin: 1rem 0 0.5rem; display: flex; justify-content: space-between;">
+                                        <span>Risk Profile</span>
+                                        <span style="color: #3B82F6;">Low</span>
+                                    </div>
+                                    <div class="progress-container" style="background: #334155;"><div class="progress-fill" style="width: 15%; background: #3B82F6;"></div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uploads-card" style="margin-top: 2rem;">
+                        <h3><i class="fa-solid fa-shield-halved" style="color: #8B5CF6;"></i> AI Smart Audit</h3>
+                        <p style="color: #64748B;">Run a deep scan on all pending invoices to detect anomalies or tax mismatch.</p>
+                        <button class="btn btn-outline" style="border-color: #8B5CF6; color: #8B5CF6; margin-top: 1rem;" onclick="runSmartAudit()">Start Deep Scan</button>
+                        <div id="audit-logs" style="margin-top: 1.5rem; max-height: 200px; overflow-y: auto; background: #F8FAFC; padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.85rem; display: none;"></div>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="invoiceModal" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); display: none; z-index: 5000; align-items: center; justify-content: center;">
+        <div class="modal-content" style="background: white; padding: 2rem; border-radius: 12px; width: 500px; max-width: 90%;">
+            <h3>Create New E-Invoice</h3>
+            <div class="form-grid" style="grid-template-columns: 1fr; margin-top: 1.5rem; gap: 1rem;">
+                <div class="input-group">
+                    <label>Recipient Name</label>
+                    <input type="text" placeholder="Enter company name">
+                </div>
+                <div class="input-group">
+                    <label>Invoice Amount</label>
+                    <input type="number" placeholder="₹ 0.00">
+                </div>
+            </div>
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button class="btn btn-primary" onclick="createInvoice()">Generate IRN</button>
+                <button class="btn btn-outline" onclick="closeModal('invoiceModal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-container" style="position: fixed; bottom: 2rem; right: 2rem; z-index: 6000;"></div>
+
+    <!-- Scripts -->
+    <script src="js/e-invoice-dashboard.js"></script>
+    <script src="js/ai-assistant.js"></script>
+</body>
+
+</html>

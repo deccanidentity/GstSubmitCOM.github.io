@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Way Submit | Smart E-Way Bill Management</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="img/logo.png">
+</head>
+
+<body style="background: var(--bg-main); color: var(--text-main);">
+
+    <!-- Header -->
+    <header class="header" id="header"></header>
+
+    <!-- Hero -->
+    <section class="hero" style="padding: 10rem 0 4rem;">
+        <div class="hero-mesh"></div>
+        <div class="container">
+            <div class="hero-text-content" style="text-align: center; max-width: 800px; margin: 0 auto;">
+                <div class="hero-pill" style="background: rgba(5, 150, 105, 0.1); color: var(--accent);"><span>PRO</span> Logistics Compliance</div>
+                <h1 class="text-gradient">E-Way Submit</h1>
+                <p class="hero-subtitle">Automated E-Way bill generation with intelligent route optimization and real-time validity tracking. Keep your goods moving without compliance hurdles.</p>
+                <div style="margin-top: 2rem;">
+                    <a href="e-way-dashboard.html" class="btn btn-primary btn-lg">Launch Command Center</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <h2>The E-Way Workflow</h2>
+                <p>Streamlined logistics compliance from pickup to delivery.</p>
+            </div>
+
+            <div class="workflow-container">
+                <div class="workflow-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                    <div class="workflow-node" style="padding: 2rem;">
+                        <i class="fa-solid fa-file-invoice" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h4>Invoice Data</h4>
+                        <p style="font-size: 0.8rem;">Import invoice details automatically.</p>
+                    </div>
+                    <div class="workflow-node" style="padding: 2rem;">
+                        <i class="fa-solid fa-truck-moving" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                        <h4>Vehicle Master</h4>
+                        <p style="font-size: 0.8rem;">Select vehicle and transporter IDs.</p>
+                    </div>
+                    <div class="workflow-node" style="padding: 2rem;">
+                        <i class="fa-solid fa-route" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                        <h4>Distance Calc</h4>
+                        <p style="font-size: 0.8rem;">Auto PIN-to-PIN mapping.</p>
+                    </div>
+                    <div class="workflow-node" style="padding: 2rem;">
+                        <i class="fa-solid fa-check-to-slot" style="font-size: 2rem; color: var(--success); margin-bottom: 1rem;"></i>
+                        <h4>EWB Ready</h4>
+                        <p style="font-size: 0.8rem;">Official E-Way bill generated instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="section bg-alt">
+        <div class="container">
+            <div class="section-title">
+                <h2>Logistics Compliance Features</h2>
+                <p>Designed for transporters, manufacturers, and e-commerce giants.</p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h3>One-Click Generation</h3>
+                    <p>Generate E-Way bills directly from your invoices with zero data reentry.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3>Consolidated EWB</h3>
+                    <p>Easily manage multiple shipments in a single vehicle with consolidated bills.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    <h3>Validity Monitoring</h3>
+                    <p>AI-driven alerts for expiring bills with one-tap extension capabilities.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-file-excel"></i></div>
+                    <h3>Bulk Data Import</h3>
+                    <p>Import transport data via Excel, CSV, or direct ERP API integration.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-route"></i></div>
+                    <h3>Route Optimization</h3>
+                    <p>Calculate distance automatically using PIN code to PIN code mapping.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fa-solid fa-print"></i></div>
+                    <h3>Custom Printing</h3>
+                    <p>Print E-Way bills in various formats with your company branding.</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 4rem;">
+                <a href="e-way-dashboard.html" class="btn btn-primary btn-lg">Explore Dashboard</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer"></footer>
+
+    <!-- Scripts -->
+    <script src="js/sync_footers.js"></script>
+    <script src="js/interactivity.js"></script>
+</body>
+
+</html>
