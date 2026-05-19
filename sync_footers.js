@@ -194,9 +194,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         <p>Next-gen tax & compliance solutions for modern businesses. Expert-assisted, AI-powered, and 100% accurate.</p>
                         <div class="footer-social">
-                            <a href="https://facebook.com/gstsubmit" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
-                            <a href="https://x.com/gstsubmit" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
-                            <a href="https://instagram.com/gstsubmit" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="https://www.facebook.com/profile.php?id=61590260663704" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="https://x.com/GSTSubmit_Dis" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
+                            <a href="https://www.instagram.com/gstsubmit_deccanidentity/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
                             <a href="https://linkedin.com/company/gstsubmit" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
                             <a href="https://youtube.com/@gstsubmit" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
                         </div>
