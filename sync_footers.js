@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <a href="https://x.com/GSTSubmit_Dis" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
                             <a href="https://www.instagram.com/gstsubmit_deccanidentity/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
                             <a href="https://linkedin.com/company/gstsubmit" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon"><i class="fa-brands fa-linkedin-in"></i></a>
-                            <a href="https://youtube.com/@gstsubmit" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
+                            <a href="https://youtu.be/oXtMGy-F8bI" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="social-icon"><i class="fa-brands fa-youtube"></i></a>
                         </div>
                     </div>
                     
