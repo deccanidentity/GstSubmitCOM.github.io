@@ -226,35 +226,33 @@
                     </div>
                 </div>
 
-                <!-- Row 2 / Right Column: Request Callback Form Card -->
+                <!-- Row 2 / Right Column:  Get Expert Assistance   / Request Callback Form Card -->
                 <div class="cta-form-card-modern">
-                    <h3 class="cta-form-title">Request Callback</h3>
+                    <h3 class="cta-form-title">Get Expert Assistance</h3>
+
                     <form
                         action="https://docs.google.com/forms/d/e/1FAIpQLSfDSwPG4ni_-f0OmqpbjdTCpPvZ1kG6uru0iHfhK_IhFnfVDg/formResponse"
-                        method="POST" target="hidden_iframe" onsubmit="submitted=true;">
-                        <div class="form-group-modern">
-                            <label for="cta-name">Full Name</label>
-                            <input type="text" id="cta-name" name="entry.678056629" placeholder="Enter your full name" required>
+                        method="POST" target="hidden_iframe" onsubmit="window.submitted=true">
+                        <div class="form-group">
+                            <input type="text" name="entry.678056629" placeholder="Full Name" required>
                         </div>
-                        <div class="form-group-modern">
-                            <label for="cta-phone">Phone Number</label>
-                            <input type="tel" id="cta-phone" name="entry.157727938" placeholder="Enter phone number" required>
-                        </div>
+                        <div class="form-group">
+                            <input type="tel" name="entry.157727938" placeholder="Phone Number" required>
 
-                        <div class="form-group-modern">
-                            <label for="cta-email">Email ID</label>
-                            <input type="email" id="cta-email" name="entry.614191030" placeholder="name@company.com" required>
                         </div>
-                        <div class="form-group-modern">
-                            <label for="cta-service">Service Needed</label>
-                            <select id="cta-service" name="entry.746038593" required>
-                                <option value="" disabled selected>Select service</option>
-                                <option value="Gst Registration/ Filing">GST Registration / Filing</option>
+                        <div class="form-group">
+                            <input type="email" name="entry.614191030" placeholder="Email ID" required>
+
+                        </div>
+                        <div class="form-group">
+                            <select name="entry.746038593" required>
+                                <option value="" disabled selected>Service Needed</option>
+                                <option value="GST Registration / Filing">GST Registration / Filing</option>
                                 <option value="Income Tax Return">Income Tax Return (ITR)</option>
                                 <option value="TDS Management">TDS Management</option>
                                 <option value="Company Incorporation">Company Incorporation</option>
-                                <option value="Audit & Tax Strategy">Audit &amp; Tax Strategy</option>
-                                <option value="other">Other</option>
+                                <option value="Audit & Tax Strategy">Audit & Tax Strategy</option>
+                                <option value="Others">Others</option>
                             </select>
                         </div>
                         <button type="submit" class="btn-accent-glow w-full">
